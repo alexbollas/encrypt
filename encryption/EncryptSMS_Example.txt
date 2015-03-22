@@ -1,0 +1,19 @@
+	EditText message = (EditText) findViewById(R.id.textMessage);
+        EditText key = (EditText) findViewById(R.id.textKey);
+
+	try {
+            EncryptSMS eSMS = new EncryptSMS("AES", "CBC", "PKCS5Padding");
+            CipheredMessage cM = eSMS.EncryptMessage(key.getText().toString(),
+                                                    message.getText().toString());
+
+            CipheredMessage dCM = new CipheredMessage(cM.toTransmitionString());
+            String plaintext = eSMS.DecryptMessage(key.getText().toString(), dCM);
+
+            TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText(cM.toTransmitionString()
+                    + "\n"
+                    + plaintext);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
