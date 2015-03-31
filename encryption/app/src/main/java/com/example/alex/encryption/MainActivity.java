@@ -1,11 +1,13 @@
-package com.example.alex.encryption;
+package com.example.alex.encrypt;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -14,17 +16,20 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Button firstTimeButton = (Button) findViewById(R.id.receive);
-        firstTimeButton.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        // TODO Auto-generated method stub
-                        setContentView(R.layout.activity_receivetext);
-                    }
-                });
+        final Button button = (Button) findViewById(R.id.Send);
+        final Button change = (Button) findViewById(R.id.receive);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                sendMessage(v);
+                // Perform action on click
+            }
+        });
+        change.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setContentView(R.layout.activity_receive);
+                // Perform action on click
+            }
+        });
     }
 
 
@@ -49,5 +54,26 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void sendMessage(View view) {
+        EditText number = (EditText) findViewById(R.id.recNum);
+        EditText message = (EditText) findViewById(R.id.msgContent);
+        EditText key = (EditText) findViewById(R.id.secretKey);
 
+        try {
+            EncryptSMS eSMS = new EncryptSMS("AES", "CBC", "PKCS5Padding");
+            CipheredMessage cM = eSMS.EncryptMessage(key.getText().toString(),
+                    message.getText().toString());
+            SmsManager sms = SmsManager.getDefault();
+            sms.sendTextMessage(number.toString(), null, cM.toString(), null, null);
+
+
+        /*    TextView textView = (TextView) findViewById(R.id.msgContent);
+            textView.setText(cM.toTransmitionString()
+                    + "\n"
+                    + plaintext);*/
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
