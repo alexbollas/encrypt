@@ -1,8 +1,4 @@
-/**
- * Created by sglitowitz on 3/12/2015.
- */
-
-package com.example.alex.encryption;
+package com.example.alex.encrypt;
 
 import android.util.Base64;
 import android.util.Log;
@@ -74,10 +70,10 @@ public class EncryptSMS {
      * @return
      * @throws Exception
      */
-    public String DecryptMessage(String p_key, CipheredMessage p_cm) throws Exception {
-        try {
-            KeySpec ks = new PBEKeySpec(p_key.toCharArray(), p_cm.get_salt(), this._ITERATIONS, this._KEYSIZE);
-            SecretKeyFactory skf = SecretKeyFactory.getInstance(this._KFALGORITHM);
+          public String DecryptMessage(String p_key, CipheredMessage p_cm) throws Exception {
+                try {
+                    KeySpec ks = new PBEKeySpec(p_key.toCharArray(), p_cm.get_salt(), this._ITERATIONS, this._KEYSIZE);
+                    SecretKeyFactory skf = SecretKeyFactory.getInstance(this._KFALGORITHM);
 
             byte[] key = skf.generateSecret(ks).getEncoded();
             SecretKey sk = new SecretKeySpec(key, this._algorithm);

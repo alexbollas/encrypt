@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,6 +19,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         final Button button = (Button) findViewById(R.id.Send);
         final Button change = (Button) findViewById(R.id.receive);
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sendMessage(v);
@@ -62,9 +64,9 @@ public class MainActivity extends ActionBarActivity {
         try {
             EncryptSMS eSMS = new EncryptSMS("AES", "CBC", "PKCS5Padding");
             CipheredMessage cM = eSMS.EncryptMessage(key.getText().toString(),
-                    message.getText().toString());
+                  message.getText().toString());
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(number.toString(), null, cM.toString(), null, null);
+            sms.sendTextMessage(number.getText().toString(), null, cM.toTransmitionString(), null, null);
 
 
         /*    TextView textView = (TextView) findViewById(R.id.msgContent);

@@ -1,8 +1,4 @@
-/**
- * Created by sglitowitz on 3/12/2015.
- */
-
-package com.example.alex.encryption;
+package com.example.alex.encrypt;
 
 import android.util.Base64;
 import android.util.Log;

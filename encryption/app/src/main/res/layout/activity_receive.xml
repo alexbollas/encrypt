@@ -11,25 +11,25 @@
         android:layout_height="wrap_content"
 
         android:orientation="horizontal" >
-    <TextView
-        android:id="@+id/FromView"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/FromView"
+            android:layout_width="wrap_content"
 
-        android:layout_height="wrap_content"
-        android:text="From: "
-        android:textSize="32sp"
-        android:inputType="text"/>
+            android:layout_height="wrap_content"
+            android:text="From: "
+            android:textSize="32sp"
+            android:inputType="text"/>
 
-    <TextView
-        android:id="@+id/senderNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/senderNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:textSize="32sp"
-        android:inputType="text"
-        />
+            android:textSize="32sp"
+            android:inputType="text"
+            />
 
-        </LinearLayout>
+    </LinearLayout>
 
 
     <TextView
@@ -39,7 +39,7 @@
         android:textSize="32sp"
         android:layout_marginTop="20dp"
         android:text="Secret Key"
-         />
+        />
 
     <EditText
         android:id="@+id/secretKey"
@@ -56,7 +56,7 @@
         android:layout_marginTop="20dp"
         android:textSize="32sp"
         android:text="Decrypted Message:"
-         />
+        />
 
     <TextView
         android:id="@+id/decryptedMsg"
@@ -74,7 +74,7 @@
             android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:text="Submit" />
-        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
