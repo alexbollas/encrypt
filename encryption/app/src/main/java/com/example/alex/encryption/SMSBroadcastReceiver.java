@@ -31,7 +31,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
         String msgContent = "";
         String originNum = "";
         Intent rec = new Intent(context, receive.class);
-        context.startActivity(rec);
+
         rec.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         rec.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         StringBuffer buffer = new StringBuffer();
