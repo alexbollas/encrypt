@@ -62,7 +62,10 @@
         android:id="@+id/decryptedMsg"
         android:layout_width="match_parent"
         android:layout_height="98dp"
-        android:layout_weight="0.05" />
+        android:layout_weight="0.05"
+        android:textSize="25sp"
+        android:text="Decrypted Message:"
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout2"

@@ -1,17 +1,22 @@
-package com.example.alex.encrypt;
+package com.example.alex.encryption;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.Toast;
 
 
+
 public class MainActivity extends ActionBarActivity {
+
+    String TAG = "RVS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,7 @@ public class MainActivity extends ActionBarActivity {
         EditText number = (EditText) findViewById(R.id.recNum);
         EditText message = (EditText) findViewById(R.id.msgContent);
         EditText key = (EditText) findViewById(R.id.secretKey);
+        Log.d(TAG, "Sending Message...");
 
         try {
             EncryptSMS eSMS = new EncryptSMS("AES", "CBC", "PKCS5Padding");

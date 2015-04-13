@@ -1,4 +1,4 @@
-package com.example.alex.encrypt;
+package com.example.alex.encryption;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.content.BroadcastReceiver;
@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,12 +20,13 @@ import android.widget.Toast;
  */
 public class SMSBroadcastReceiver extends BroadcastReceiver {
 
+    String TAG = "RVS";
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
 
-
+        Log.d(TAG, "onReceive of SMSBroadcastReceiver");
         Bundle bundle = intent.getExtras();
         Object[] object = (Object[]) bundle.get("pdus");
         SmsMessage sms[] = new SmsMessage[object.length];

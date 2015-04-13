@@ -1,4 +1,4 @@
-package com.example.alex.encrypt;
+package com.example.alex.encryption;
 
 import android.util.Base64;
 import android.util.Log;

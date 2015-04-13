@@ -1,7 +1,8 @@
-package com.example.alex.encrypt;
+package com.example.alex.encryption;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.telephony.SmsManager;
@@ -30,19 +31,31 @@ public class receive extends ActionBarActivity {
     String msgContent = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Log.d("RVS", "onCreate of receive");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive);
         senderNum= (TextView) findViewById(R.id.senderNumber);
         decryptedMsg =(TextView) findViewById(R.id.decryptedMsg);
+        Log.d("RVS", "getting extras");
+
         Bundle extras = getIntent().getExtras();
-        originNum= extras.getString("recNumber");
+        Log.d("RVS","got extras");
+        originNum= extras.getString("recNum");
+        Log.d("RVS","got originNum: " + originNum);
         encryptedMsg =  extras.getString("msgContent");
-        if(originNum!=""){
+        Log.d("RVS","got msg:" + encryptedMsg);
+
+
+        if(originNum != null && !originNum.equals("")){
+            Log.d("RVS", originNum);
             senderNum.setText(originNum);
             Button sub = (Button) findViewById(R.id.submit);
             sub.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     secretKey=(EditText) findViewById(R.id.secretKey);
+                    Log.d("RVS", "trying to decrypt");
                     try {
                         EncryptSMS dec = new EncryptSMS("AES", "CBC", "PKCS5Padding");
                         CipheredMessage mes = new CipheredMessage(encryptedMsg);
@@ -52,10 +65,14 @@ public class receive extends ActionBarActivity {
 
                     }
                     catch (Exception e) {
+                        Log.d("RVS", "decryption failed");
+                        Log.d("RVS", e.toString());
                         throw new RuntimeException(e);
                     }
                 }
             });
+        } else {
+            Log.d("RVS","Sender number not valid");
         }
 
 
