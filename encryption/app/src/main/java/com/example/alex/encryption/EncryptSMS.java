@@ -71,19 +71,20 @@ public class EncryptSMS {
      * @throws Exception
      */
           public String DecryptMessage(String p_key, CipheredMessage p_cm) throws Exception {
-                try {
-                    KeySpec ks = new PBEKeySpec(p_key.toCharArray(), p_cm.get_salt(), this._ITERATIONS, this._KEYSIZE);
-                    SecretKeyFactory skf = SecretKeyFactory.getInstance(this._KFALGORITHM);
+            try {
+                KeySpec ks = new PBEKeySpec(p_key.toCharArray(), p_cm.get_salt(), this._ITERATIONS, this._KEYSIZE);
+                SecretKeyFactory skf = SecretKeyFactory.getInstance(this._KFALGORITHM);
 
-            byte[] key = skf.generateSecret(ks).getEncoded();
-            SecretKey sk = new SecretKeySpec(key, this._algorithm);
+                byte[] key = skf.generateSecret(ks).getEncoded();
+                SecretKey sk = new SecretKeySpec(key, this._algorithm);
 
-            IvParameterSpec ivps = new IvParameterSpec(p_cm.get_iv());
-            this._smsC.init(Cipher.DECRYPT_MODE, sk, ivps);
+                IvParameterSpec ivps = new IvParameterSpec(p_cm.get_iv());
+                this._smsC.init(Cipher.DECRYPT_MODE, sk, ivps);
 
-            return (new String(this._smsC.doFinal(p_cm.get_ciphertext()), this._ENCODING));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+                return (new String(this._smsC.doFinal(p_cm.get_ciphertext()), this._ENCODING));
+            } catch (Exception e) {
+                //throw new RuntimeException(e);
+                return "DECRYPTION FAILED";
+            }
     }
 }
